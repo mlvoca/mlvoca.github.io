@@ -1,286 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MLvoca - Free LLM API</title>
-    <meta name="description" content="Access a free LLM API for text generation with models like TinyLlama and DeepSeek R1. No API key required, no rate limits! Fast, efficient, and easy to use.">
-    <meta name="keywords" content="free llm api, text generation API, AI models, TinyLlama, DeepSeek R1, open-source AI, github">
-    <meta name="author" content="mlvoca">
-    <meta name="google-site-verification" content="fdyq3CHPPN3-FQjd51PCUT7FsuE-HMECoHXx_Vs0QBg" />
-    <link rel="canonical" href="https://mlvoca.github.io/free-llm-api/">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mlvoca · Free LLM API for research and learning</title>
+<meta name="description" content="mlvoca offers a free LLM API for text generation with TinyLlama and DeepSeek R1. No API key and no sign-up, for research, teaching and learning.">
+<meta name="author" content="Benedikt Augenstein">
+<meta name="google-site-verification" content="fdyq3CHPPN3-FQjd51PCUT7FsuE-HMECoHXx_Vs0QBg">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#1a1240">
+<link rel="canonical" href="https://mlvoca.github.io/">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="assets/site.webmanifest">
 
-    <link rel="icon" href="https://mlvoca.github.io/favicon.ico" sizes="any">
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/mlvoca/free-llm-api/refs/heads/main/images/favicon-48x48.png" sizes="48x48" />
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/mlvoca/free-llm-api/refs/heads/main/images/favicon-32x32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/mlvoca/free-llm-api/refs/heads/main/images/favicon-16x16.png" sizes="16x16" />
-    
-    <meta property="og:title" content="Free LLM API - mlvoca.com">
-    <meta property="og:site_name" content="Free LLM API - mlvoca">
-    <meta property="og:description" content="Generate text using free AI models like TinyLlama and DeepSeek R1. No API key required, easy integration.">
-    <meta property="og:image" content="https://github.com/mlvoca/mlvoca.com/blob/main/images/mlvoca_image2.png?raw=true">
-    <meta property="og:url" content="https://mlvoca.github.io/free-llm-api/">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Free LLM API - mlvoca.com">
-    <meta name="twitter:description" content="Try the free LLM API for AI-powered text generation with no rate limits.">
-    <meta name="twitter:image" content="https://github.com/mlvoca/mlvoca.com/blob/main/images/mlvoca_image2.png?raw=true">
-    
-    <script type="application/ld+json">
-    {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "name": "Free LLM API - mlvoca",
-    "headline": "Free LLM API – Access Powerful, Cost-Free Language Models",
-    "description": "Learn about our Free LLM API, which enables developers to integrate advanced language models into their applications at no cost.",
-    "url": "https://mlvoca.github.io/free-llm-api/"
-    }
-    </script>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="mlvoca">
+<meta property="og:title" content="mlvoca · Free LLM API">
+<meta property="og:description" content="Text generation with TinyLlama and DeepSeek R1 over a simple HTTP endpoint. No API key, no sign-up.">
+<meta property="og:url" content="https://mlvoca.github.io/">
+<meta property="og:image" content="https://mlvoca.github.io/free-llm-api/images/mlvoca_image2.png">
+<meta property="og:image:alt" content="Illustration: LLMs via API">
+<meta name="twitter:card" content="summary_large_image">
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa;
-            color: #333;
-            text-align: center;
-        }
-        header {
-            background-color: #b91788;
-            color: white;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 15px !important;
-            max-width: 800px;
-            margin: auto;
-            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.4);
-        }
-        header h1 {
-            margin: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        img {
-            width: 70%;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-        section {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-        h2 {
-            color: #b91788;
-        }
-        code {
-            background: #eee;
-            padding: 5px;
-            border-radius: 5px;
-        }
-        .code-container {
-            background-color: #282c34;
-            color: #fff;
-            padding: 15px;
-            border-radius: 8px;
-            position: relative;
-            font-family: monospace;
-            text-align: left;
-            display: inline-block;
-            width: 100%;
-            max-width: 100%;
-            box-sizing: border-box;
-            overflow: visible;
-            border-color: #b91788;
-            border: 2px solid #b91788;
-        }
-        .copy-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #b91788;
-            color: #fff;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-        .copy-btn:hover {
-            background: #a6157b;
-        }
-        .cookie-btn {
-            top: 10px;
-            right: 10px;
-            background: #b91788;
-            color: #fff;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        .cookie-btn:hover {
-            background: #a6157b;
-        }
-.copy-message {
-    position: absolute;
-    top: -30px; /* Position above the button */
-    left: 50%;
-    transform: translateX(-50%);
-    background: #ffb4e8;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 12px;
-    opacity: 1;
-    transition: opacity 0.3s ease-in-out;
-}
-
-@media (max-width: 600px) {
-    .copy-btn {
-        top: -30px; /* Moves the button above the code block */
-        right: 7%; /* Centers the button */
-        transform: translateX(50%); /* Keeps positioning responsive */
-    }
-}
-pre {
-    margin: 0;
-    padding-bottom: 0;
-}
-
-li {
-    margin-bottom: 10px; /* Adds more space between list items */
-}
-
-    </style>
+<!-- assets/site.css and assets/cookie-notice.js are copies of the ones in mlvoca/free-llm-api; keep them in sync. -->
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  .home { min-height: calc(100vh - 60px); display: flex; flex-direction: column; }
+  .home .hero { flex: 1; display: flex; align-items: center; }
+  .try { margin-top: 30px; max-width: 640px; }
+  .try .code { margin: 0; }
+</style>
 </head>
 <body>
-    <header>
-        <h1>Free LLM API - mlvoca.com</h1>
-        <p>Unlock AI-powered text generation with no API key required.</p>
-    </header>
+<a class="skip" href="#main">Skip to content</a>
 
-    <div class="container">
-        <section>
-            <h2>Get access to the free LLM API:</h2>
-            <p><a href="https://mlvoca.github.io/free-llm-api/" target="_blank">https://mlvoca.github.io/free-llm-api/</a></p>
-        </section>
-    </div>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="assets/favicon-48x48.png" alt="" width="28" height="28">mlvoca</a>
+    <nav class="links" aria-label="Sections">
+      <a href="/free-llm-api/">API docs</a>
+      <a href="/free-llm-api/#limits">Limits</a>
+    </nav>
+    <a class="gh" href="https://github.com/mlvoca/free-llm-api" target="_blank" rel="noopener">
+      <svg viewBox="0 0 16 16" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</header>
 
-    <div id="cookie-banner" style="position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ccc;padding:15px;text-align:center;z-index:9999;">
-    <p style="margin:0;">
-        We use cookies to improve your experience. You can accept all, reject all, or choose which cookies to allow.<br>
-        More information: <a href="https://github.com/mlvoca/free-llm-api/blob/main/legal/PRIVACY_POLICY.md" target="_blank">Privacy Policy</a>
-    </p>
-    <button class="cookie-btn" style="position: relative" onclick="saveConsentAll()" style="margin:10px;">Accept all cookies</button>
-    <button class="cookie-btn" style="position: relative" onclick="saveConsentEssential()" style="margin:10px;">Only essential cookies</button>
-    <br></br>
-    <div style="margin-top:10px;">
-        <label><input type="checkbox" id="essential"> Essential (required)</label>
-        <label><input type="checkbox" id="analytics"> Analytics (currently not used)</label>
+<div class="home">
+  <main id="main" class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">mlvoca</span>
+        <h1>A free LLM API for research and learning.</h1>
+        <p class="lead">Generate text with TinyLlama and DeepSeek R1 through one HTTP endpoint.
+          No sign-up and no API key.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="/free-llm-api/">Read the API docs</a>
+          <a class="btn btn-ghost" href="https://github.com/mlvoca/free-llm-api" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        <div class="try">
+          <div class="code">
+            <div class="code-head"><span>Try it</span><button class="copy" type="button">Copy</button></div>
+<pre><code>curl -X POST https://mlvoca.com/api/generate -d '{
+  <span class="k">"model"</span>: <span class="s">"tinyllama"</span>,
+  <span class="k">"prompt"</span>: <span class="s">"Why is the sky blue?"</span>,
+  <span class="k">"stream"</span>: false
+}'</code></pre>
+          </div>
+        </div>
+      </div>
+      <picture>
+        <source srcset="assets/mlvoca_image3.avif" type="image/avif">
+        <img src="assets/mlvoca_image3.png" width="560" height="373" alt="Illustration: an LLM server answering API requests" fetchpriority="high">
+      </picture>
     </div>
-    <button class="cookie-btn" style="position: relative; font-size: 13px" onclick="saveConsent()" style="margin:10px;">Save Preferences</button>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <span>By Benedikt Augenstein · <a href="mailto:contact@mlvoca.com">contact@mlvoca.com</a></span>
+      <nav aria-label="Legal and links">
+        <a href="https://github.com/mlvoca/free-llm-api" target="_blank" rel="noopener">GitHub</a>
+        <a href="/free-llm-api/imprint.html">Imprint</a>
+        <a href="/free-llm-api/privacy.html">Privacy policy</a>
+        <a href="/free-llm-api/privacy.html#cookies">Cookies</a>
+        <a href="/free-llm-api/terms.html">Terms of use</a>
+      </nav>
     </div>
+  </footer>
 </div>
-    <footer>
-        <p>Visit us on <a href="https://github.com/mlvoca/free-llm-api" target="_blank">GitHub</a> for more details.</p>
-        <p><a href="https://github.com/mlvoca/free-llm-api/blob/main/legal/IMPRINT.md" target="_blank">Imprint (Legal Disclosure)</a></p>
-        <p><a href="https://github.com/mlvoca/free-llm-api/blob/main/legal/PRIVACY_POLICY.md" target="_blank">Privacy Policy</a></p>
-        <p><a href="https://github.com/mlvoca/free-llm-api/blob/main/legal/TERMS_OF_USE.md" target="_blank">Terms of use</a></p>
-        <p>Contact: <a href="mailto:mlvoca@protonmail.com">mlvoca@protonmail.com</a></p>
-    </footer>
 
-    <script>
-    if (localStorage.getItem('cookieConsent') !== null) {
-        document.getElementById("cookie-banner").style.setProperty("display", "none", "important");
-    };
-
-    const date = new Date();
-    date.setMonth(date.getMonth() + 1); // 1-month expiry
-
-
-  function saveConsentAll() {
-    const consent = {
-      essential: true,
-      analytics: true//,
-      //marketing: marketing
-      };
-    document.getElementById("cookie-banner").style.display = "none";
-    localStorage.setItem('cookieConsent', consent);
-    document.cookie = "userConsent=all; expires=" + date.toUTCString() + "; path=/; SameSite=Lax";
-    };
-
-  function saveConsentEssential() {
-    const consent = {
-      essential: true,
-      analytics: false//,
-      //marketing: marketing
-      };
-    document.getElementById("cookie-banner").style.display = "none";
-    localStorage.setItem('cookieConsent', consent);
-    document.cookie = "userConsent=essential; expires=" + date.toUTCString() + "; path=/; SameSite=Lax";
-    };
-
-  function saveConsent() {
-    const essential = document.getElementById("essential").checked;
-    const analytics = document.getElementById("analytics").checked;
-    //const marketing = document.getElementById("marketing").checked;
-    const consent = {
-      essential: essential,
-      analytics: analytics//,
-      //marketing: marketing
-    };
-    document.cookie = "cookie_consent=" + JSON.stringify(consent) + "; path=/; max-age=" + 60*60*24*365;
-    if (essential == false) {
-        alert("Essential cookies have to be accepted. If you do not with this, you may leave the site.");
-        }
-    else {
-    document.getElementById("cookie-banner").style.display = "none";
-    document.cookie = "userConsent=custom; expires=" + date.toUTCString() + "; path=/; SameSite=Lax";
-    };
-    localStorage.setItem('cookieConsent', consent);
-  }
-
-/*   window.onload = function() {
-    if (document.cookie.indexOf("essential") === -1) {
-      document.getElementById("cookie-banner").style.display = "block";
-    }
-  }; */
-
-function copyToClipboard(button) {
-    const preElement = button.nextElementSibling; // Selects the adjacent <pre> tag
-    const text = preElement.innerText; // Gets text inside the pre block
-    navigator.clipboard.writeText(text).then(() => {
-        showCopyMessage(button); // Trigger popup message near the button
+<script>
+  document.querySelectorAll('.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var code = btn.closest('.code').querySelector('pre');
+      if (!navigator.clipboard) return;
+      navigator.clipboard.writeText(code.textContent).then(function () {
+        btn.textContent = 'Copied';
+        setTimeout(function () { btn.textContent = 'Copy'; }, 1500);
+      });
     });
-}
-
-function showCopyMessage(button) {
-    let message = document.createElement("span");
-    message.className = "copy-message";
-    message.innerText = "Copied!";
-    
-    button.appendChild(message);
-
-    setTimeout(() => {
-        message.remove(); // Remove message after 2 seconds
-    }, 2000);
-}
-
-
-// When the user clicks on div, open the popup
-function myFunction() {
-  var popup = document.getElementById("myPopup");
-  popup.classList.toggle("show");
-}
-
-    </script>
+  });
+</script>
+<script src="assets/cookie-notice.js" data-privacy="/free-llm-api/privacy.html#cookies" defer></script>
 </body>
 </html>
